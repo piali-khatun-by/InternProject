@@ -7,8 +7,9 @@ import { BiAnalyse, BiSearch } from "react-icons/bi";
 import {  AiTwotoneFileExclamation } from "react-icons/ai";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-//import {AnimatePresence, motion} from 'framer-motion/dist/framer-motion';
+
 import SidebarMenu from "./SidebarMenu";
+import Header from "./Header";
 const routes = [
 
   {
@@ -39,15 +40,16 @@ const routes = [
     icon: <MdMessage />,
     subRoutes: [
       {
+        path: "/Messages/PublishMessage",
+        name: "Publish Message",
+        icon: <AiTwotoneFileExclamation />,
+      },
+      {
         path: "/Messages/AllMessages",
         name: "All Messages ",
         icon: <AiTwotoneFileExclamation />,
       },
-      {
-        path: "/Messages/DeadLetterQueue",
-        name: "Dead Letter Queue",
-        icon: <AiTwotoneFileExclamation />,
-      },
+      
     ],
   },
   {
@@ -100,7 +102,7 @@ const SideBar = ({ children }) => {
   };
 
   return (
-    <>
+    <>   
       <div className="main-container">
         <motion.div
           animate={{

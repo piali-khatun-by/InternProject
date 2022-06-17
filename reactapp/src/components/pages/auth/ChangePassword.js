@@ -27,7 +27,7 @@ const ChangePassword = () => {
     }
   };
   return <>
-    <Box sx={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', maxWidth: 600, mx: 4 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', maxWidth: 400, mx: 4 }}>
       <h1>Change Password</h1>
       <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }} id="password-change-form">
         <TextField margin="normal" required fullWidth name="password" label="New Password" type="password" id="password" />

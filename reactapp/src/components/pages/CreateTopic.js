@@ -1,31 +1,51 @@
 import React from "react";
-import { FormGroup, Form, Input, Button } from "reactstrap";
+import {useState} from "react";
+import axios  from "axios";
+import SideBar from "./SideBar";
 
 function CreateKafkaTopic() {
-    function handleSubmit(e) {
-        e.preventDefault();
-        console.log('You clicked submit.');
+    const url = "http://localhost:9992/topic"
+    const [data, setData] = useState({
+      name: "",
+      partition:""
+    })
+    function handle(e){
+      const newdata={...data}
+      newdata[e.target.id] = e.target.value
+      setData(newdata)
+      
+      console.log(newdata)
     }
+    function submit(e){
+        e.preventDefault();
+        axios.post(url,{
+            name: data.name,
+            partitions:data.partition
+        })
+        .then(res=>{
+          alert("topic created")
+            console.log(res.data)
+            
+        })
+    }
+    return(
+      <div class="row">
+             
+            <div class="column"><SideBar /></div>
+            <div class="column" className="login-form1">
+            <h2>Create Topic</h2><br></br>
+          <form onSubmit={(e)=> submit(e)}>
+            <label for="name">Enter Topic name</label>
+            <input onChange={(e) => handle(e)} id="name" value={data.name} type = "text"></input><br /><br />
 
-    return (
-        <div className="container">
-            <div className="login-form1">
-            <Form onSubmit={handleSubmit}>
-                <FormGroup>
-                    <label for="userName">Enter Topic Name :</label>
-                    <Input type="text" style={{ width: "340px" }}></Input><br /><br />
-
-                    <label for="id">Number of Partitions :</label>
-                    <Input type="number" style={{ width: "320px" }}></Input><br /><br />
-
-                    <Button type="submit" color="success" >Submit</Button>
-
-                </FormGroup>
-            </Form>
-
-</div>
-
+            <label for="partition">Enter Number of Partitions</label>
+            <input onChange={(e) => handle(e)} id="partition" value={data.partition} type = "int"></input><br /><br />
+             <button>Submit</button>
+          </form>
+          </div>
         </div>
-    );
+    
+      ); 
+    
 }
 export default CreateKafkaTopic;

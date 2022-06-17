@@ -1,5 +1,7 @@
 import React from "react";
-import serviceapi from "./auth/serviceapi";
+import serviceapi from "../api/serviceapi";
+
+
 
 class PublishComponent extends React.Component {
 
@@ -12,19 +14,18 @@ class PublishComponent extends React.Component {
     componentDidMount() {
         serviceapi.getMessage().then((response) => {
             this.setState({ msg: response.data })
-
         });
     }
     render() {
 
 
         return (
-            <div>
-                <table className="table table-striped">
+            <div className="table">
+                <table>
                     <thead>
                         <tr>
-                            <td>Id</td>
-                            <td>Messages</td>
+                            <th>Id</th>
+                            <th>Messages</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,7 +39,7 @@ class PublishComponent extends React.Component {
                             )
                         }
                     </tbody>
-                </table>
+                </table> 
             </div>
         )
     }
